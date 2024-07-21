@@ -1,4 +1,4 @@
-AbstractMachine kernels
+# AbstractMachine kernels
 
 CONTACTS
 
@@ -22,4 +22,16 @@ am-kernels子项目用于收录一些可以在AM上运行的测试集和简单�
 └── tests                       # 一些具有针对性的测试集
     ├── am-tests                # 针对AM API实现的测试集
     └── cpu-tests               # 针对CPU指令实现的测试集
+```
+
+## cpu-tests
+
+```bash
+make ARCH=$ISA-nemu ALL=xxx gdb
+make ARCH=$ISA-nemu ALL=xxx run
+```
+
+for example:
+```bash
+make ARCH=riscv32-nemu ALL=dummy run
 ```
