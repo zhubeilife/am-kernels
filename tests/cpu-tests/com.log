@@ -1,0 +1,10 @@
+/bin/echo -e "NAME = dummy\nSRCS = tests/dummy.c\ninclude ${AM_HOME}/Makefile" > Makefile.dummy
+if make -s -f Makefile.dummy ARCH=riscv32-nemu run; then \
+	printf "[%14s] \033[1;32mPASS\033[0m\n" dummy >> .result; \
+else \
+	printf "[%14s] \033[1;31m***FAIL***\033[0m\n" dummy >> .result; \
+fi
+rm -f Makefile.dummy
+echo "test list [1 item(s)]:" dummy
+cat .result
+rm .result
