@@ -191,6 +191,11 @@ void test_strcat(){
     if (strcmp(strcat(strcpy(str4, str3), s[3]), s[4]) != 0 ) putstr("test_strcat fail\n");
 }
 
+// TODO: test max number
+// include <limits.h>
+// int data[] = {0, INT_MAX / 17, INT_MAX, INT_MIN, INT_MIN + 1,
+//              UINT_MAX / 17, INT_MAX / 17, UINT_MAX};
+
 void test_printf(){
     char buf[128] = "";
 
