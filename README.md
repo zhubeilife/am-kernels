@@ -34,4 +34,5 @@ make ARCH=$ISA-nemu ALL=xxx run
 for example:
 ```bash
 make ARCH=riscv32-nemu ALL=dummy run
+make ALL=string ARCH=native run
 ```
