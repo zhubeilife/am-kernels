@@ -35,4 +35,5 @@ for example:
 ```bash
 make ARCH=riscv32-nemu ALL=dummy run
 make ALL=string ARCH=native run
+make ARCH=riscv32-nemu run mainargs=love <--等同于--> ARCH=native mainargs=love make run
 ```
