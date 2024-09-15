@@ -1,6 +1,7 @@
 #include <klib.h>
 #include <klib-macros.h>
 #include <stdint.h>
+#include <limits.h>
 
 // copy from
 // https://github.com/Kingfish404/am-kernels/blob/ics2021/tests/klib-tests/src/main.c
@@ -191,10 +192,36 @@ void test_strcat(){
     if (strcmp(strcat(strcpy(str4, str3), s[3]), s[4]) != 0 ) putstr("test_strcat fail\n");
 }
 
-// TODO: test max number
-// include <limits.h>
 // int data[] = {0, INT_MAX / 17, INT_MAX, INT_MIN, INT_MIN + 1,
-//              UINT_MAX / 17, INT_MAX / 17, UINT_MAX};
+//               UINT_MAX / 17, INT_MAX / 17, UINT_MAX};
+
+void test_printf_limit() {
+    char buf[128] = "";
+
+    sprintf(buf, "%d ", 0);
+    check(strcmp(buf, "0") == 0);
+
+    sprintf(buf, "%d ", INT_MAX / 17);
+    check(strcmp(buf, "126322567") == 0);
+
+    sprintf(buf, "%d ", INT_MAX);
+    check(strcmp(buf, "2147483647") == 0);
+
+    sprintf(buf, "%d ", INT_MIN);
+    check(strcmp(buf, "-2147483648") == 0);
+
+    sprintf(buf, "%d ", INT_MIN + 1);
+    check(strcmp(buf, "-2147483647") == 0);
+
+    sprintf(buf, "%d ", UINT_MAX / 17);
+    check(strcmp(buf, "252645135") == 0);
+
+    sprintf(buf, "%d ", UINT_MAX);
+    check(strcmp(buf, "-1") == 0);
+
+    sprintf(buf, "%u ", UINT_MAX);
+    check(strcmp(buf, "4294967295") == 0);
+}
 
 void test_printf(){
     char buf[128] = "";
@@ -225,6 +252,7 @@ int main() {
     test_memcmp();
 
     test_printf();
+    test_printf_limit();
 
     putstr("========== Test end ===========\n");
     return 0;
