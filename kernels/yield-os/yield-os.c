@@ -2,6 +2,13 @@
 #include <klib-macros.h>
 
 #define STACK_SIZE (4096 * 8)
+/*
+- 当PCB作为栈使用时，`stack[STACK_SIZE]`被使用
+- 当PCB存储Context指针时，`cp`字段被使用
+- 由于是union，这两种使用方式是互斥的，不会同时使用
+
+这种设计在简单的操作系统内核中很常见，特别是在内存受限的环境中，通过union来复用内存空间，提高内存使用效率。
+*/
 typedef union {
   uint8_t stack[STACK_SIZE];
   struct { Context *cp; };
